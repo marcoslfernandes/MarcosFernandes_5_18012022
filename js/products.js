@@ -1,14 +1,18 @@
-  let queryString = window.location.search;
-  let urlParams = new URLSearchParams(queryString);
-  let Id = urlParams.get('id');
-
+  // Variables produits 
+  
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const Id = urlParams.get('id');
   let imgItem = document.getElementsByClassName("item__img")[0];
   let titleItem = document.getElementById("title");
   let priceItem = document.getElementById("price");
   let descriptionItem = document.getElementById("description");
   let colorsItem = document.getElementById("colors");
-
-  
+  let quantityEl = document.getElementById("quantity")
+  let panier = []
+  let addToCart = document.getElementById("addToCart")
+ 
+  // Function rendre visible canapé sur la page produit
 
   fetch("http://localhost:3000/api/products/"+Id)
   .then(function(res) {
@@ -23,12 +27,22 @@
     priceItem.innerHTML += `${product.price}`
     descriptionItem.innerHTML += `${product.description}`
     product.colors.forEach(element => {
-      colorsItem.innerHTML += `<option value="">${element}</option>`
-    });
-  });
+      colorsItem.innerHTML += `<option value="${element}">${element}</option>`
+    })
+
+   addToCart.addEventListener("click", function(){
+       panier.push(Id, colorsItem.value, quantityEl.value)
+  
+
+      console.log(panier)
+   })
+   
+ 
 
 
 
+
+  })
 
 
 
@@ -36,17 +50,24 @@
 
 
   
+ 
+  // colorsItem.addEventListener("change", function(){
+
+    // })
+
+    // quantityEl.addEventListener("change", function(){
+
+    // })
+
+ 
+ 
 
 
 
 
 
 
-
-
-
-
-
+  
 
 
 
