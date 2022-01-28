@@ -8,6 +8,7 @@
   let descriptionItem = document.getElementById("description");
   let colorsItem = document.getElementById("colors");
 
+  
 
   fetch("http://localhost:3000/api/products/"+Id)
   .then(function(res) {
@@ -17,23 +18,17 @@
   })
   .then(function(product) {
     console.log(product);
-
-  
     imgItem.innerHTML += `<img src="${product.imageUrl}" />`
     titleItem.innerHTML += `${product.name}`
     priceItem.innerHTML += `${product.price}`
     descriptionItem.innerHTML += `${product.description}`
-    
     product.colors.forEach(element => {
       colorsItem.innerHTML += `<option value="">${element}</option>`
     });
-    
- 
-
-  })
+  });
 
 
-product()
+
 
 
 
@@ -133,22 +128,22 @@ product()
 //       localStorage.setObj("panier",panier);
 //     }
 
-//     //envoie les différentes couleurs des canapés
-//     if(product!==false){
-//       for (let j=0; j<product.colors.length; j++){
-//         document.getElementById("colors").innerHTML+=
-//         '<option value="'+product.colors[j]+'">'+product.colors[j]+'</option>';
-//       }
-//       // buton au clic redirectionne à la pag panier 
-//        document.getElementById("addToCart").addEventListener("click", event=>{
-//         ItemPanier(product._id, document.getElementById("quantity").value, document.getElementById("colors").value);
-//         window.location = "./cart.html"
-//       });
+    // //envoie les différentes couleurs des canapés
+    // if(product!==false){
+    //   for (let j=0; j<product.colors.length; j++){
+    //     document.getElementById("colors").innerHTML+=
+    //     '<option value="'+product.colors[j]+'">'+product.colors[j]+'</option>';
+    //   }
+    //   // buton au clic redirectionne à la pag panier 
+    //    document.getElementById("addToCart").addEventListener("click", event=>{
+    //     ItemPanier(product._id, document.getElementById("quantity").value, document.getElementById("colors").value);
+    //     window.location = "./cart.html"
+    //   });
       
-//     }else{
-//         // gère la redirection si produit inexistant
-//         window.location = "./index.html"
-//       }
+    // }else{
+    //     // gère la redirection si produit inexistant
+    //     window.location = "./index.html"
+    //   }
  
 
 //     });
