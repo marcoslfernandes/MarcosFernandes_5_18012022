@@ -31,17 +31,15 @@
     })
 
    addToCart.addEventListener("click", function(){
-       panier.push(Id, colorsItem.value, quantityEl.value)
-  
-
-      console.log(panier)
+      // if (panier.indexOf(colorsItem.value) !== -1){
+      if(panier.includes(colorsItem.value, product._id) === false){
+      panier.push(product._id, colorsItem.value, quantityEl.value)
+    } else { 
+      panier.push(+ quantityEl.value)
+    }
+          console.log(panier)
+          localStorage.setItem("Mon panier", JSON.stringify(panier))
    })
-   
- 
-
-
-
-
   })
 
 
