@@ -9,7 +9,6 @@
   let descriptionItem = document.getElementById("description");
   let colorsItem = document.getElementById("colors");
   let quantityEl = document.getElementById("quantity")
-  let panier = []
   let addToCart = document.getElementById("addToCart")
  
   // Function rendre visible canapé sur la page produit
@@ -32,13 +31,39 @@
 
    addToCart.addEventListener("click", function(){
       // if (panier.indexOf(colorsItem.value) !== -1){
-      if(panier.includes(colorsItem.value, product._id) === false){
-      panier.push(product._id, colorsItem.value, quantityEl.value)
-    } else { 
-      panier.push(+ quantityEl.value)
-    }
-          console.log(panier)
-          localStorage.setItem("Mon panier", JSON.stringify(panier))
+
+    let objJSON = {};
+     objJSON.id = product._id;
+     objJSON.color = colorsItem.value;
+     objJSON.quantity = parseInt(quantityEl.value);
+     let cart = JSON.parse( localStorage.getItem("cart") )
+      
+     
+
+      if(cart != null){
+        let index = -1
+      for(i=0;i<cart.length;i++){
+        if(cart[i].id==product._id && cart[i].color==colorsItem.value){
+          index=i;
+          break;
+        }
+      }
+      if(index!=-1){
+         let cartIndex = cart[index]
+         cartIndex.quantity += parseInt(quantityEl.value)
+         cart[index] = cartIndex
+      } else{
+           cart.push(objJSON)
+      }
+      } else {
+        cart = []
+        cart.push(objJSON)
+      }
+        
+        localStorage.setItem("cart", JSON.stringify(cart))
+        
+        console.log(JSON.parse(localStorage.getItem("cart")))
+        
    })
   })
 
@@ -47,15 +72,9 @@
 
 
 
+
   
  
-  // colorsItem.addEventListener("change", function(){
-
-    // })
-
-    // quantityEl.addEventListener("change", function(){
-
-    // })
 
  
  
@@ -66,22 +85,6 @@
 
 
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
