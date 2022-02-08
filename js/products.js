@@ -62,7 +62,7 @@
         
         localStorage.setItem("cart", JSON.stringify(cart))
         
-        console.log(JSON.parse(localStorage.getItem("cart")))
+        JSON.parse(localStorage.getItem("cart"))
         
    })
   })
