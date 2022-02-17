@@ -1,5 +1,3 @@
-  // Variables produits 
-  
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const Id = urlParams.get('id');
@@ -8,10 +6,10 @@
   let priceItem = document.getElementById("price");
   let descriptionItem = document.getElementById("description");
   let colorsItem = document.getElementById("colors");
-  let quantityEl = document.getElementById("quantity")
-  let addToCart = document.getElementById("addToCart")
+  let quantityEl = document.getElementById("quantity");
+  let addToCart = document.getElementById("addToCart");
  
-  // Function rendre visible canapé sur la page produit
+  // Function pour rendre visible les canapés choisis dans la page produit
 
   fetch("http://localhost:3000/api/products/"+Id)
   .then(function(res) {
@@ -27,27 +25,24 @@
     descriptionItem.innerHTML += `${product.description}`
     product.colors.forEach(element => {
       colorsItem.innerHTML += `<option value="${element}">${element}</option>`
-    })
+    });
+
+    // Ajouter un produit dans le panier 
 
    addToCart.addEventListener("click", function(){
-      // if (panier.indexOf(colorsItem.value) !== -1){
-
     let objJSON = {};
      objJSON.id = product._id;
      objJSON.color = colorsItem.value;
      objJSON.quantity = parseInt(quantityEl.value);
-     let cart = JSON.parse( localStorage.getItem("cart") )
-      
-     
-
+     let cart = JSON.parse(localStorage.getItem("cart"));
       if(cart != null){
         let index = -1
       for(i=0;i<cart.length;i++){
         if(cart[i].id==product._id && cart[i].color==colorsItem.value){
           index=i;
           break;
-        }
-      }
+        };
+      };
       if(index!=-1){
          let cartIndex = cart[index]
          cartIndex.quantity += parseInt(quantityEl.value)
@@ -58,14 +53,11 @@
       } else {
         cart = []
         cart.push(objJSON)
-      }
-        
-        localStorage.setItem("cart", JSON.stringify(cart))
-        
-        JSON.parse(localStorage.getItem("cart"))
-        
-   })
-  })
+      };
+        localStorage.setItem("cart", JSON.stringify(cart));
+        JSON.parse(localStorage.getItem("cart"));    
+   });
+  });
 
 
 
