@@ -185,7 +185,7 @@ function changeItem(id, color) {
     }
     // function adresse
     function validateAddress(address) {
-      let regex = /^[a-z][a-z '-.,]{1,31}$|^$/i;
+      let regex = /^[0-9a-zA-Z\-_\s]{1,}$/;
       if (regex.test(address) == false || address == "") {
         return false;
       } else {
