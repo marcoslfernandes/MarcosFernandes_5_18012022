@@ -65,16 +65,11 @@ function displayProduct(product,cartItem){
 
 // Function panier vide
 function panierVide() {
-  if (
-    localStorage.getItem("cart") === null ||
-    localStorage.getItem("cart") === 0 || localStorage.getItem("cart").length === 0
-  ) {
-    alert("Votre panier est vide!");
-    return true;
-  } else {
-    return false;
-  }
-};
+  cart=JSON.parse(localStorage.cart);
+  if(cart!=null && cart.length>0)
+  return false
+  return true;
+  };
   
   // Function pour modifier la quantité dans le panier 
 
@@ -148,9 +143,13 @@ function changeItem(id, color) {
 };
 
   // Validation formulaire 
-  if (panierVide() == false){
+ 
   const button = document.getElementById("order")
   button.addEventListener("click", (event) => {
+    if(panierVide()){
+      alert('Votre panier est vide');
+      return;
+  }
     event.preventDefault();
     let firstName = document.getElementById("firstName").value;
     let lastName = document.getElementById("lastName").value;
@@ -263,7 +262,6 @@ function changeItem(id, color) {
         });
     };
   });
-};
 displayTotal();
 loadCart();
 
